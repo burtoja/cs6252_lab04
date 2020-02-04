@@ -45,6 +45,12 @@ switch($action) {
         }
         break;
     case 'Add List':
+    	$new_list = filter_input(INPUT_POST, 'newlistname');
+    	if (empty($new_list)) {
+    		$errors[] = 'The new list name cannot be empty.';
+    	} else {
+    		$_SESSION['tasklistnames'][] = $new_task;
+    	}
         break;
     case 'Select List':
         break;
