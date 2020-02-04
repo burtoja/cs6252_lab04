@@ -65,29 +65,33 @@
             <br>
             <?php endif; ?>
     		
-    		
+    		 
             <!-- part 5: the tasks of the selected list -->
-        	<h2>Tasks</h2>
-            <?php if (count($task_list) == 0) : ?>
-                <p>There are no tasks in the selected task list.</p>
+        	<?php if (count($task_list_names) != 0) : ?>
+	        	<h2>Tasks</h2>
+	            <?php if (count($task_list) == 0) : ?>
+	                <p>There are no tasks in the selected task list.</p>
+	            <?php else: ?>
+	                <ul>
+	                <?php foreach($task_list as $id => $task) : ?>
+	                    <li><?php echo $id + 1 . '. ' . $task; ?></li>
+	                <?php endforeach; ?>
+	                </ul>
+	            <?php endif; ?>
+	            <br>
+	    
+	            <!-- part 6: the add form for tasks -->
+	            <h2>Add Task</h2>
+	            <form action="." method="post" >
+	                <label>Task:</label>
+	                <input type="text" name="newtask" id="newtask"><br>
+	                <label>&nbsp;</label>
+	                <input type="submit" name="action" value="Add Task">
+	            </form>
+	            <br>
             <?php else: ?>
-                <ul>
-                <?php foreach($task_list as $id => $task) : ?>
-                    <li><?php echo $id + 1 . '. ' . $task; ?></li>
-                <?php endforeach; ?>
-                </ul>
+            	<p>Add a new list to be managed.</p>
             <?php endif; ?>
-            <br>
-    
-            <!-- part 6: the add form for tasks -->
-            <h2>Add Task</h2>
-            <form action="." method="post" >
-                <label>Task:</label>
-                <input type="text" name="newtask" id="newtask"><br>
-                <label>&nbsp;</label>
-                <input type="submit" name="action" value="Add Task">
-            </form>
-            <br>
     
             <!-- part 7: the delete form for tasks -->
             <?php if (count($task_list) > 0) : ?>

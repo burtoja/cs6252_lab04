@@ -49,8 +49,8 @@ switch($action) {
     	if (empty($new_list)) {
     		$errors[] = 'The new list name cannot be empty.';
     	} else {
-    		$_SESSION['tasklistnames'][] = $new_task;
-    	}
+    		$_SESSION['tasklistnames'][] = $new_list;
+    	} 
         break;
     case 'Select List':
         break;
