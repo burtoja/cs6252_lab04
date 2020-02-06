@@ -68,7 +68,7 @@
     		 
             <!-- part 5: the tasks of the selected list -->
         	<?php if (count($task_list_names) != 0) : ?>
-	        	<h2>Tasks</h2>
+	        	<h2><?php echo $selected_list; ?></h2>
 	            <?php if (count($task_list) == 0) : ?>
 	                <p>There are no tasks in the selected task list.</p>
 	            <?php else: ?>
@@ -99,7 +99,7 @@
             <form action="." method="post" >
                 <label>Task:</label>
                 <select name="taskid">
-                    <?php foreach($task_list as $id => $task) : ?>
+                    <?php foreach($task_list[$selected_list] as $id => $task) : ?>
                         <option value="<?php echo $id; ?>">
                             <?php echo $task; ?>
                         </option>

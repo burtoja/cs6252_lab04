@@ -33,7 +33,7 @@ switch($action) {
         if (empty($new_task)) {
             $errors[] = 'The new task cannot be empty.';
         } else {
-            $_SESSION['tasklist'][] = $new_task;
+        	$_SESSION['tasklist'][] = $new_task;
         }
         break;
     case 'Delete Task':
@@ -67,10 +67,11 @@ if (isset($_SESSION['tasklistnames'])) {
     $task_list_names = $_SESSION['tasklistnames'];
 }
 if (isset($_SESSION['tasklist'])) {
-    $task_list = $_SESSION['tasklist'];
+	$task_list = $_SESSION['tasklist'];
 } 
-if (isset($_SESSION['selectedlist'])) {
+if (count($task_list_names) > 0) {
 	$selected_list = $_SESSION['selectedlist'];
 }
+
 include('task_list.php');
 ?>
