@@ -11,7 +11,6 @@ if (!isset($_SESSION['tasklist'])) {
     $_SESSION['tasklist'] = array();
 }
 
-
 $action = filter_input(INPUT_POST, 'action');
 $errors = array();
 
@@ -33,7 +32,8 @@ switch($action) {
         if (empty($new_task)) {
             $errors[] = 'The new task cannot be empty.';
         } else {
-        	$_SESSION['tasklist'][] = $new_task;
+        	$selected_list = $_SESSION['selectedlist'];
+        	$_SESSION['tasklist'][$selected_list][] = $new_task;
         }
         break;
     case 'Delete Task':
@@ -41,8 +41,9 @@ switch($action) {
         if ($task_index === NULL || $task_index === FALSE) {
             $errors[] = 'The task cannot be deleted.';
         } else {
-            unset($_SESSION['tasklist'][$task_index]);
-            $_SESSION['tasklist'] = array_values($_SESSION['tasklist']);
+        	$selected_list = $_SESSION['selectedlist'];
+            unset($_SESSION['tasklist'][$selected_list][$task_index]);
+            $_SESSION['tasklist'][$selected_list] = array_values($_SESSION['tasklist'][$selected_list]);
         }
         break;
     case 'Add List':
@@ -51,8 +52,12 @@ switch($action) {
     		$errors[] = 'The new list name cannot be empty.';
     	} else {
     		$_SESSION['tasklistnames'][] = $new_list;
+    		if (!isset($_SESSION['tasklist'])) {
+    			$_SESSION['tasklist'] = array();
+    		}
+    		$_SESSION['tasklist'][$new_list] = array();
+    		$_SESSION['selectedlist'] = $new_list;
     	} 
-    	$_SESSION['selectedlist'] = $new_list;
         break;
     case 'Select List':
     	$selected_list = filter_input(INPUT_POST, 'listname');
@@ -71,6 +76,7 @@ if (isset($_SESSION['tasklist'])) {
 } 
 if (count($task_list_names) > 0) {
 	$selected_list = $_SESSION['selectedlist'];
+	$task_list = $_SESSION['tasklist'][$selected_list];
 }
 
 include('task_list.php');

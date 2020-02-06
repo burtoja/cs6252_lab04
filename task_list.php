@@ -99,7 +99,7 @@
             <form action="." method="post" >
                 <label>Task:</label>
                 <select name="taskid">
-                    <?php foreach($task_list[$selected_list] as $id => $task) : ?>
+                    <?php foreach($task_list as $id => $task) : ?>
                         <option value="<?php echo $id; ?>">
                             <?php echo $task; ?>
                         </option>
