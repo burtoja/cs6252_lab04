@@ -11,6 +11,7 @@ if (!isset($_SESSION['tasklist'])) {
     $_SESSION['tasklist'] = array();
 }
 
+
 $action = filter_input(INPUT_POST, 'action');
 $errors = array();
 
@@ -51,8 +52,11 @@ switch($action) {
     	} else {
     		$_SESSION['tasklistnames'][] = $new_list;
     	} 
+    	$_SESSION['selectedlist'] = $new_list;
         break;
     case 'Select List':
+    	$selected_list = filter_input(INPUT_POST, 'listname');
+    	$_SESSION['selectedlist'] = $selected_list;
         break;
 }
 
@@ -65,5 +69,8 @@ if (isset($_SESSION['tasklistnames'])) {
 if (isset($_SESSION['tasklist'])) {
     $task_list = $_SESSION['tasklist'];
 } 
+if (isset($_SESSION['selectedlist'])) {
+	$selected_list = $_SESSION['selectedlist'];
+}
 include('task_list.php');
 ?>
